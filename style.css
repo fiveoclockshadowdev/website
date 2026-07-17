@@ -1,0 +1,363 @@
+/* Five O'Clock Shadow — palette drawn from icon.png:
+   black #000000, brown #3b1615, white #ffffff */
+
+:root {
+  --ink: #0d0b0a;
+  --brown: #3b1615;
+  --brown-soft: #6b3a34;
+  --paper: #ffffff;
+  --tint: #f7f2f0;
+  --line: #e8e0dc;
+  --muted: #7d726c;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.6;
+}
+
+/* ---------- Sidebar ---------- */
+
+.sidebar {
+  width: 240px;
+  flex-shrink: 0;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 32px 20px 24px;
+  background: var(--paper);
+  border-right: 1px solid var(--line);
+}
+
+.brand {
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  color: var(--ink);
+  margin-bottom: 28px;
+}
+
+.brand img {
+  width: 96px;
+  height: 96px;
+  display: block;
+  margin: 0 auto 10px;
+}
+
+.brand .brand-name {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 17px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  line-height: 1.35;
+}
+
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sidebar nav a {
+  display: block;
+  padding: 10px 14px;
+  border-radius: 8px;
+  text-decoration: none;
+  color: var(--ink);
+  font-size: 15px;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.sidebar nav a:hover {
+  background: var(--tint);
+  color: var(--brown);
+}
+
+.sidebar nav a.active {
+  background: var(--brown);
+  color: #fff;
+}
+
+.sidebar footer {
+  margin-top: auto;
+  padding-top: 24px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* ---------- Main content ---------- */
+
+main {
+  flex: 1;
+  padding: 64px 56px;
+}
+
+.page {
+  max-width: 720px;
+}
+
+h1 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: normal;
+  font-size: 40px;
+  line-height: 1.2;
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  color: var(--muted);
+  font-size: 17px;
+  margin-bottom: 36px;
+}
+
+hr.rule {
+  border: none;
+  border-top: 1px solid var(--line);
+  margin: 0 0 36px;
+}
+
+.page h2 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: normal;
+  font-size: 24px;
+  margin: 32px 0 12px;
+}
+
+.page p {
+  margin-bottom: 16px;
+}
+
+.page a {
+  color: var(--brown);
+}
+
+.page a:hover {
+  color: var(--brown-soft);
+}
+
+/* ---------- Buy Me a Razor (donation) ---------- */
+
+.bmc-card {
+  max-width: 460px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 28px;
+  box-shadow: 0 2px 10px rgba(13, 11, 10, 0.04);
+}
+
+.bmc-card h2 {
+  margin: 0 0 6px;
+  font-size: 22px;
+}
+
+.bmc-tagline {
+  color: var(--muted);
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.razor-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  background: var(--tint);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin-bottom: 16px;
+}
+
+.razor-emoji {
+  font-size: 30px;
+  line-height: 1;
+}
+
+.razor-x {
+  color: var(--muted);
+  font-size: 18px;
+}
+
+.qty-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  color: var(--ink);
+  font-size: 15px;
+  font-family: inherit;
+  cursor: pointer;
+  transition: border-color 0.15s ease, color 0.15s ease,
+    background 0.15s ease;
+}
+
+.qty-btn:hover {
+  border-color: var(--brown);
+  color: var(--brown);
+}
+
+.qty-btn.selected {
+  background: var(--brown);
+  border-color: var(--brown);
+  color: #fff;
+}
+
+.qty-custom {
+  width: 64px;
+  height: 42px;
+  border: 1px solid var(--line);
+  border-radius: 21px;
+  text-align: center;
+  font-size: 15px;
+  font-family: inherit;
+  background: var(--paper);
+  color: var(--ink);
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+.qty-custom::-webkit-outer-spin-button,
+.qty-custom::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.qty-custom:focus {
+  outline: none;
+  border-color: var(--brown);
+}
+
+.support-btn {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 999px;
+  background: var(--brown);
+  color: #fff;
+  font-size: 17px;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.support-btn:hover {
+  background: var(--brown-soft);
+}
+
+.bmc-qr {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+  text-align: center;
+}
+
+.bmc-qr p {
+  font-size: 13px;
+  color: var(--muted);
+  margin: 0;
+}
+
+.qr-card {
+  width: min(220px, 100%);
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  border: 2px dashed var(--line);
+  border-radius: 12px;
+  color: var(--muted);
+  font-size: 14px;
+  text-align: center;
+  padding: 16px;
+  margin: 0 auto 10px;
+}
+
+.qr-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+@keyframes qr-pulse {
+  0%,
+  100% {
+    border-color: var(--line);
+  }
+  50% {
+    border-color: var(--brown);
+    color: var(--brown);
+  }
+}
+
+.qr-card.pulse {
+  animation: qr-pulse 0.9s ease 2;
+}
+
+.supporters {
+  margin-top: 28px;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+/* ---------- Small screens: sidebar becomes a top bar ---------- */
+
+@media (max-width: 760px) {
+  body {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: static;
+    padding: 20px 16px 12px;
+    border-right: none;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .brand {
+    margin-bottom: 16px;
+  }
+
+  .brand img {
+    width: 64px;
+    height: 64px;
+  }
+
+  .sidebar nav {
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .sidebar footer {
+    display: none;
+  }
+
+  main {
+    padding: 32px 20px;
+  }
+
+  h1 {
+    font-size: 30px;
+  }
+}

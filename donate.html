@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Buy Me a Razor — Five O'Clock Shadow</title>
+  <link rel="icon" type="image/png" href="icon.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <aside class="sidebar">
+    <a class="brand" href="index.html">
+      <img src="icon.png" alt="Five O'Clock Shadow logo">
+      <span class="brand-name">Five O'Clock<br>Shadow</span>
+    </a>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="donate.html" class="active" aria-current="page">Buy Me a Razor</a>
+      <a href="about.html">Who Are We</a>
+    </nav>
+    <footer>&copy; 2026 Five O'Clock Shadow</footer>
+  </aside>
+
+  <main>
+    <div class="page">
+      <h1>Buy Me a Razor</h1>
+      <hr class="rule">
+
+      <div class="bmc-card">
+        <h2>&#129682; Buy Five O'Clock Shadow a razor</h2>
+        <p class="bmc-tagline">Each razor is $1 and keeps the shadow at bay for at least a day.</p>
+
+        <div class="razor-row">
+          <span class="razor-emoji">&#129682;</span>
+          <span class="razor-x">&times;</span>
+          <button type="button" class="qty-btn selected" aria-pressed="true">1</button>
+          <button type="button" class="qty-btn" aria-pressed="false">3</button>
+          <button type="button" class="qty-btn" aria-pressed="false">5</button>
+          <input class="qty-custom" type="number" min="1" max="999" placeholder="10"
+                 aria-label="Custom number of razors">
+        </div>
+
+        <button type="button" class="support-btn" id="supportBtn">Support &middot; $1</button>
+
+        <div class="bmc-qr">
+          <!-- When you have your PayPal QR code image:
+               1. Save it in this folder as paypal-qr.png
+               2. Delete the placeholder <span> line below and uncomment the <img> line -->
+          <div class="qr-card" id="qrCard">
+            <span>PayPal QR code coming soon</span>
+            <!-- <img src="paypal-qr.png" alt="PayPal donation QR code"> -->
+          </div>
+          <p>Scan with your phone to send razors via PayPal.</p>
+        </div>
+      </div>
+
+      <p class="supporters">No razors bought yet &mdash; be the first. (Don't worry, the shadow always grows back.)</p>
+    </div>
+  </main>
+
+  <script>
+    // Optional: set your PayPal.Me username (e.g. "fiveoclockshadow") and the
+    // Support button will open PayPal with the total pre-filled.
+    // Leave it "" to rely on the QR code instead.
+    var PAYPAL_ME = "";
+    var RAZOR_PRICE = 1; // dollars per razor
+
+    var qtyBtns = document.querySelectorAll(".qty-btn");
+    var customInput = document.querySelector(".qty-custom");
+    var supportBtn = document.getElementById("supportBtn");
+    var qrCard = document.getElementById("qrCard");
+    var qty = 1;
+
+    function selectBtn(target) {
+      qtyBtns.forEach(function (b) {
+        b.classList.toggle("selected", b === target);
+        b.setAttribute("aria-pressed", b === target ? "true" : "false");
+      });
+    }
+
+    function setQty(n) {
+      qty = Math.max(1, Math.floor(n) || 1);
+      supportBtn.innerHTML = "Support &middot; $" + qty * RAZOR_PRICE;
+    }
+
+    qtyBtns.forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        selectBtn(btn);
+        customInput.value = "";
+        setQty(Number(btn.textContent));
+      });
+    });
+
+    customInput.addEventListener("input", function () {
+      if (customInput.value === "") {
+        selectBtn(qtyBtns[0]);
+        setQty(1);
+        return;
+      }
+      selectBtn(null);
+      setQty(Number(customInput.value));
+    });
+
+    supportBtn.addEventListener("click", function () {
+      if (PAYPAL_ME) {
+        window.open("https://paypal.me/" + PAYPAL_ME + "/" + qty * RAZOR_PRICE, "_blank");
+      } else {
+        // No link configured yet: nudge people toward the QR code.
+        qrCard.classList.remove("pulse");
+        void qrCard.offsetWidth; /* restart the animation */
+        qrCard.classList.add("pulse");
+        qrCard.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
+    });
+  </script>
+
+</body>
+</html>
